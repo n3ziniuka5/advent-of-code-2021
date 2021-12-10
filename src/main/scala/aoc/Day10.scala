@@ -1,12 +1,14 @@
-package day1
+package aoc
+
+import aoc.Common.timed
 
 import scala.io.Source
 
 object Day10 {
   def main(args: Array[String]): Unit = {
     val lines = Source.fromResource("day10.txt").getLines().toList
-    println(s"Part 1 - ${part1(lines)}")
-    println(s"Part 2 - ${part2(lines)}")
+    timed("Part 1", part1(lines))
+    timed("Part 2", part2(lines))
   }
 
   def firstInvalidCharacterWithRemainder(str: String, openings: List[Char] = Nil): (Option[Char], List[Char]) = {

@@ -1,5 +1,6 @@
-package day1
+package aoc
 
+import aoc.Common.timed
 import scala.io.Source
 
 object Day2 {
@@ -8,8 +9,8 @@ object Day2 {
 
   def main(args: Array[String]): Unit = {
     val lines = Source.fromResource("day2.txt").getLines().toList
-    println(s"Part 1 - ${part1(lines)}")
-    println(s"Part 2 - ${part2(lines)}")
+    timed("Part 1", part1(lines))
+    timed("Part 2", part2(lines))
   }
 
   def part1(lines: List[String]): Int = {

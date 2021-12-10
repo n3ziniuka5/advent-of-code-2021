@@ -1,14 +1,15 @@
-package day1
+package aoc
 
 import java.math.MathContext
 import scala.io.Source
 import scala.math.BigDecimal.RoundingMode
+import aoc.Common.timed
 
 object Day7 {
   def main(args: Array[String]): Unit = {
     val lines = Source.fromResource("day7.txt").getLines().toList.head.split(",").map(_.toInt).toList
-    println(s"Part 1 - ${part1(lines)}")
-    println(s"Part 2 - ${part2(lines)}")
+    timed("Part 1", part1(lines))
+    timed("Part 2", part2(lines))
   }
 
   def part1(positions: List[Int]): Int = {
