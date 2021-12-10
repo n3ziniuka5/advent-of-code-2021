@@ -17,8 +17,8 @@ object Day2 {
       val Array(direction, units) = move.split(" ")
       direction match {
         case "forward" => accum.copy(horizontal = accum.horizontal + units.toInt)
-        case "down" => accum.copy(depth = accum.depth + units.toInt)
-        case "up" => accum.copy(depth = accum.depth - units.toInt)
+        case "down"    => accum.copy(depth = accum.depth + units.toInt)
+        case "up"      => accum.copy(depth = accum.depth - units.toInt)
       }
     }
 
@@ -29,9 +29,10 @@ object Day2 {
     val finalPosition = lines.foldLeft(Position2(0, 0, 0)) { (accum, move) =>
       val Array(direction, units) = move.split(" ")
       direction match {
-        case "forward" => accum.copy(horizontal = accum.horizontal + units.toInt, depth = accum.depth + accum.aim * units.toInt)
+        case "forward" =>
+          accum.copy(horizontal = accum.horizontal + units.toInt, depth = accum.depth + accum.aim * units.toInt)
         case "down" => accum.copy(aim = accum.aim + units.toInt)
-        case "up" => accum.copy(aim = accum.aim - units.toInt)
+        case "up"   => accum.copy(aim = accum.aim - units.toInt)
       }
     }
 

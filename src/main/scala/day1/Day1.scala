@@ -10,7 +10,8 @@ object Day1 {
   }
 
   def part1(lines: List[String]): Int = {
-    lines.map(_.toInt)
+    lines
+      .map(_.toInt)
       .sliding(2)
       .count { l =>
         l(1) > l(0)
@@ -18,7 +19,8 @@ object Day1 {
   }
 
   def part2(lines: List[String]): Int = {
-    lines.map(_.toInt)
+    lines
+      .map(_.toInt)
       .sliding(3)
       .map(_.sum)
       .sliding(2)

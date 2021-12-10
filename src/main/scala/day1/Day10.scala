@@ -14,40 +14,50 @@ object Day10 {
       case None => (None, openings)
       case Some(head) =>
         head match {
-          case opening @ ('(' | '[' | '{' | '<')  => firstInvalidCharacterWithRemainder(str.tail, opening +: openings)
-          case closing => (head, openings.headOption) match {
-            case (')', Some('(')) => firstInvalidCharacterWithRemainder(str.tail, openings.tail)
-            case (']', Some('[')) => firstInvalidCharacterWithRemainder(str.tail, openings.tail)
-            case ('}', Some('{')) => firstInvalidCharacterWithRemainder(str.tail, openings.tail)
-            case ('>', Some('<')) => firstInvalidCharacterWithRemainder(str.tail, openings.tail)
-            case _ => (Some(head), Nil)
-          }
+          case opening @ ('(' | '[' | '{' | '<') => firstInvalidCharacterWithRemainder(str.tail, opening +: openings)
+          case closing =>
+            (head, openings.headOption) match {
+              case (')', Some('(')) => firstInvalidCharacterWithRemainder(str.tail, openings.tail)
+              case (']', Some('[')) => firstInvalidCharacterWithRemainder(str.tail, openings.tail)
+              case ('}', Some('{')) => firstInvalidCharacterWithRemainder(str.tail, openings.tail)
+              case ('>', Some('<')) => firstInvalidCharacterWithRemainder(str.tail, openings.tail)
+              case _                => (Some(head), Nil)
+            }
 
         }
     }
   }
 
   def part1(lines: List[String]): Int = {
-    lines.map(firstInvalidCharacterWithRemainder(_)).flatMap(_._1).map {
-      case ')' => 3
-      case ']' => 57
-      case '}' => 1197
-      case '>' => 25137
-    }.sum
+    lines
+      .map(firstInvalidCharacterWithRemainder(_))
+      .flatMap(_._1)
+      .map {
+        case ')' => 3
+        case ']' => 57
+        case '}' => 1197
+        case '>' => 25137
+      }
+      .sum
   }
 
   def part2(lines: List[String]): Long = {
-    val sortedScores = lines.map(firstInvalidCharacterWithRemainder(_)).filter(_._1.isEmpty).map(_._2).map { openings =>
-      openings.foldLeft(0L) { (accum, char) =>
-        val toAdd = char match {
-          case '(' => 1
-          case '[' => 2
-          case '{' => 3
-          case '<' => 4
+    val sortedScores = lines
+      .map(firstInvalidCharacterWithRemainder(_))
+      .filter(_._1.isEmpty)
+      .map(_._2)
+      .map { openings =>
+        openings.foldLeft(0L) { (accum, char) =>
+          val toAdd = char match {
+            case '(' => 1
+            case '[' => 2
+            case '{' => 3
+            case '<' => 4
+          }
+          accum * 5 + toAdd
         }
-        accum * 5 + toAdd
       }
-    }.sorted
+      .sorted
 
     sortedScores(sortedScores.length / 2)
   }

@@ -23,12 +23,14 @@ object Day3 {
 
   def part1(lines: List[String]): Int = {
     val numLength = lines.head.length
-    val numLines = lines.length
+    val numLines  = lines.length
 
-    val gammaRate = (0 until numLength).map { i =>
-      val ones = lines.count(num => num.charAt(i) == '1')
-      if(ones > numLines / 2) '1' else '0'
-    }.mkString("")
+    val gammaRate = (0 until numLength)
+      .map { i =>
+        val ones = lines.count(num => num.charAt(i) == '1')
+        if (ones > numLines / 2) '1' else '0'
+      }
+      .mkString("")
 
     binToDec(gammaRate) * binToDec(invertBinaryNum(gammaRate))
   }
@@ -38,9 +40,10 @@ object Day3 {
     lines match {
       case head :: Nil => head
       case _ =>
-        val ones = lines.count(_.charAt(i) == '1')
+        val ones   = lines.count(_.charAt(i) == '1')
         val zeroes = lines.length - ones
-        val filterBy = if(ones >= zeroes) useCharWhen1MostCommon else invertBinaryNum(useCharWhen1MostCommon.toString).head
+        val filterBy =
+          if (ones >= zeroes) useCharWhen1MostCommon else invertBinaryNum(useCharWhen1MostCommon.toString).head
         val newLines = lines.filter(_.charAt(i) == filterBy)
         filterUntilOneRemains(newLines, useCharWhen1MostCommon, i + 1)
     }
@@ -48,7 +51,7 @@ object Day3 {
 
   def part2(lines: List[String]): Int = {
     val oxygenGeneratorRating = filterUntilOneRemains(lines, '1')
-    val co2ScrubberRating = filterUntilOneRemains(lines, '0')
+    val co2ScrubberRating     = filterUntilOneRemains(lines, '0')
 
     binToDec(oxygenGeneratorRating) * binToDec(co2ScrubberRating)
   }
