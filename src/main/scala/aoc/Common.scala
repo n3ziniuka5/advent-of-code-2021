@@ -6,6 +6,6 @@ object Common {
     val res   = f
     val end   = System.currentTimeMillis()
 
-    println(s"$label answer - $res. It took ${end - start}ms")
+    println(s"$label answer - $res It took ${end - start}ms")
   }
 }
