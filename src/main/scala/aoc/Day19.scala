@@ -200,8 +200,6 @@ object Day19 {
         .find(_._3.isDefined)
         .get
 
-      println(s"MERGING LISTS ${indexA} and ${indexB}")
-
       val newIndexA = lists(indexA) ++ mods.get._1.map(p =>
         p.copy(
           x = p.x + mods.get._2._1,
